@@ -1,0 +1,61 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Showcase 07 - 批处理+CLI展示",
+  "description": "简洁批量图像处理：批量读取 → ForEachImage缩放50% → ForEachImage转灰度 → 批量导出。附CLI使用说明。",
+  "created_at": "2026-06-17T00:00:00",
+  "modified_at": "2026-06-17T00:00:00",
+  "canvas_view": { "zoom": 0.85, "center_x": 500, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001",
+      "type": "BatchImageRead",
+      "display_name": "批量读取输入图片",
+      "position": {"x": 50, "y": 80},
+      "params": {
+        "dir_path": "C:\\Users\\lenovo\\Desktop\\test_batch_input",
+        "pattern": "*.png;*.jpg",
+        "sort_mode": "按文件名升序"
+      }
+    },
+    {
+      "id": "n002",
+      "type": "ForEachImage",
+      "display_name": "循环缩放至50%",
+      "position": {"x": 310, "y": 80},
+      "params": {
+        "operation": "缩放",
+        "param1": 0.5,
+        "param2": 0.0
+      }
+    },
+    {
+      "id": "n003",
+      "type": "ForEachImage",
+      "display_name": "循环转灰度图",
+      "position": {"x": 570, "y": 80},
+      "params": {
+        "operation": "转灰度",
+        "param1": 0.0,
+        "param2": 0.0
+      }
+    },
+    {
+      "id": "n004",
+      "type": "BatchImageWrite",
+      "display_name": "批量导出处理结果",
+      "position": {"x": 830, "y": 80},
+      "params": {
+        "dir_path": "C:\\Users\\lenovo\\Desktop\\showcase_07_output",
+        "name_template": "batch_{index}",
+        "format": "PNG",
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_images","to_node":"n002","to_port":"input_images"},
+    {"from_node":"n002","from_port":"output_images","to_node":"n003","to_port":"input_images"},
+    {"from_node":"n003","from_port":"output_images","to_node":"n004","to_port":"input_images"}
+  ],
+  "execution_order_hints": []
+}

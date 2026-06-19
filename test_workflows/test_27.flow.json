@@ -1,0 +1,53 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 27 - Data Pivot & Data Export",
+  "created_at": "2026-06-15T00:00:00",
+  "modified_at": "2026-06-15T00:00:00",
+  "canvas_view": { "zoom": 0.8, "center_x": 400, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSVRead", "display_name": "读取销售数据",
+      "position": {"x": 50, "y": 150},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_data_multi.csv", "delimiter": "逗号", "has_header": true, "encoding": "UTF-8"}
+    },
+    {
+      "id": "n002", "type": "DataPivot", "display_name": "区域×月份透视",
+      "position": {"x": 280, "y": 20},
+      "params": {"row_field": "区域", "col_field": "月份", "value_field": "销售额", "agg_func": "求和"}
+    },
+    {
+      "id": "n003", "type": "DataExport", "display_name": "导出透视表CSV",
+      "position": {"x": 510, "y": 20},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_27_pivot.csv", "format": "CSV", "delimiter": "逗号", "encoding": "UTF-8"}
+    },
+    {
+      "id": "n004", "type": "DataProfile", "display_name": "数据画像",
+      "position": {"x": 280, "y": 120},
+      "params": {}
+    },
+    {
+      "id": "n005", "type": "TextFileWrite", "display_name": "导出画像报告",
+      "position": {"x": 510, "y": 120},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_27_report.txt", "encoding": "UTF-8"}
+    },
+    {
+      "id": "n006", "type": "BarChart", "display_name": "原始数据柱状图",
+      "position": {"x": 280, "y": 240},
+      "params": {"chart_width": 800, "chart_height": 400, "title": "各月销售额与利润", "title_font_size": 16, "background_color": [255,255,255,255], "show_legend": true, "category_column": "月份", "value_columns": "销售额,利润", "mode": "分组(Grouped)", "bar_width_ratio": 0.7, "x_label": "月份", "y_label": ""}
+    },
+    {
+      "id": "n007", "type": "ImageFileWrite", "display_name": "导出图表",
+      "position": {"x": 530, "y": 240},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_27_chart.png", "format": "PNG", "png_compression": 3, "jpeg_quality": 95}
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_data","to_node":"n002","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n004","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n006","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_data","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n004","from_port":"output_report","to_node":"n005","to_port":"input_text"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n007","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

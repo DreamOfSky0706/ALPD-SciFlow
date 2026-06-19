@@ -1,0 +1,333 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n003",
+            "to_port": "input_base"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n003",
+            "to_port": "input_top"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_base"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_top"
+        },
+        {
+            "from_node": "n005",
+            "from_port": "output_image",
+            "to_node": "n006",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n006",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n007",
+            "from_port": "output_image",
+            "to_node": "n008",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n008",
+            "from_port": "output_image",
+            "to_node": "n009",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n009",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_image"
+        }
+    ],
+    "created_at": "2026-06-17T04:55:23",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T04:55:23",
+    "nodes": [
+        {
+            "display_name": "纯色背景生成(1600x900)",
+            "id": "n001",
+            "params": {
+                "color": [
+                    15,
+                    20,
+                    45,
+                    255
+                ],
+                "dpi": 300,
+                "height": 900,
+                "size_mode": "像素",
+                "width": 1600
+            },
+            "position": {
+                "x": -300,
+                "y": -225
+            },
+            "type": "SolidColorGenerate"
+        },
+        {
+            "display_name": "径向渐变叠加层(1600x900)",
+            "id": "n002",
+            "params": {
+                "angle": 0,
+                "center_x": 0.5,
+                "center_y": 0.4,
+                "color_end": [
+                    5,
+                    10,
+                    30,
+                    255
+                ],
+                "color_start": [
+                    60,
+                    100,
+                    200,
+                    200
+                ],
+                "dpi": 300,
+                "gradient_type": "径向渐变",
+                "height": 900,
+                "radius": 1.2,
+                "size_mode": "像素",
+                "width": 1600
+            },
+            "position": {
+                "x": -300,
+                "y": -375
+            },
+            "type": "GradientGenerate"
+        },
+        {
+            "display_name": "背景+渐变混合(正片叠底)",
+            "id": "n003",
+            "params": {
+                "blend_mode": "正片叠底(Multiply)",
+                "opacity": 0.85
+            },
+            "position": {
+                "x": 20,
+                "y": -375
+            },
+            "type": "Blend"
+        },
+        {
+            "display_name": "电路板纹路装饰图案",
+            "id": "n004",
+            "params": {
+                "background_color": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "density": 0.6,
+                "height": 900,
+                "line_width": 1,
+                "pattern_type": "电路板纹路",
+                "primary_color": [
+                    0,
+                    0,
+                    255,
+                    60
+                ],
+                "secondary_color": [
+                    64,
+                    128,
+                    255,
+                    30
+                ],
+                "seed": 42,
+                "width": 1600
+            },
+            "position": {
+                "x": -300,
+                "y": -525
+            },
+            "type": "CSPattern"
+        },
+        {
+            "display_name": "背景+图案混合(柔光)",
+            "id": "n005",
+            "params": {
+                "blend_mode": "柔光(SoftLight)",
+                "opacity": 0.7
+            },
+            "position": {
+                "x": 340,
+                "y": -375
+            },
+            "type": "Blend"
+        },
+        {
+            "display_name": "艺术字主标题「SciFlow」",
+            "id": "n006",
+            "params": {
+                "fill_color1": [
+                    255,
+                    200,
+                    60,
+                    255
+                ],
+                "fill_color2": [
+                    255,
+                    140,
+                    30,
+                    255
+                ],
+                "fill_mode": "水平渐变",
+                "font_family": "",
+                "font_size": 96,
+                "letter_spacing": 4,
+                "position_x": -1,
+                "position_y": -1,
+                "shadow_blur": 8,
+                "shadow_color": [
+                    0,
+                    0,
+                    0,
+                    180
+                ],
+                "shadow_enabled": true,
+                "shadow_offset_x": 4,
+                "shadow_offset_y": 4,
+                "stroke_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "stroke_width": 2,
+                "text": "SciFlow"
+            },
+            "position": {
+                "x": 660,
+                "y": -375
+            },
+            "type": "ArtisticText"
+        },
+        {
+            "display_name": "副标题文字叠加",
+            "id": "n007",
+            "params": {
+                "alignment": "左对齐",
+                "color": [
+                    220,
+                    225,
+                    240,
+                    220
+                ],
+                "font_family": "",
+                "font_size": 28,
+                "line_spacing": 1.2,
+                "stroke_color": [
+                    0,
+                    0,
+                    0,
+                    80
+                ],
+                "stroke_width": 1,
+                "text": "With ALPD",
+                "x": 550,
+                "y": 520
+            },
+            "position": {
+                "x": 980,
+                "y": -375
+            },
+            "type": "TextOverlay"
+        },
+        {
+            "display_name": "边框圆角装饰",
+            "id": "n008",
+            "params": {
+                "border_color": [
+                    30,
+                    40,
+                    70,
+                    255
+                ],
+                "border_width": 4,
+                "corner_radius": 14,
+                "shadow_blur_radius": 10,
+                "shadow_color": [
+                    0,
+                    0,
+                    0,
+                    128
+                ],
+                "shadow_enabled": false,
+                "shadow_offset_x": 5,
+                "shadow_offset_y": 5
+            },
+            "position": {
+                "x": 1300,
+                "y": -375
+            },
+            "type": "BorderDecoration"
+        },
+        {
+            "display_name": "整体阴影效果",
+            "id": "n009",
+            "params": {
+                "background_color": [
+                    245,
+                    245,
+                    248,
+                    255
+                ],
+                "blur_radius": 20,
+                "offset_x": 8,
+                "offset_y": 8,
+                "shadow_color": [
+                    0,
+                    0,
+                    0,
+                    100
+                ]
+            },
+            "position": {
+                "x": 1620,
+                "y": -375
+            },
+            "type": "DropShadow"
+        },
+        {
+            "display_name": "导出海报成品",
+            "id": "n010",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\showcase_06_poster.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 1940,
+                "y": -375
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "showcase_06"
+}

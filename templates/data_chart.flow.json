@@ -1,0 +1,64 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "数据分析出图",
+  "created_at": "2025-01-15T10:30:00",
+  "modified_at": "2025-01-15T10:30:00",
+  "canvas_view": { "zoom": 0.75, "center_x": 500, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSVRead", "display_name": "读取CSV数据",
+      "position": {"x": 50, "y": 150},
+      "params": {"file_path": "", "delimiter": "逗号", "has_header": true, "encoding": "UTF-8"}
+    },
+    {
+      "id": "n002", "type": "DataFilter", "display_name": "过滤空值",
+      "position": {"x": 250, "y": 150},
+      "params": {"column": "", "operator": "不为空", "value": ""}
+    },
+    {
+      "id": "n003", "type": "DataSort", "display_name": "数据排序",
+      "position": {"x": 450, "y": 150},
+      "params": {"sort_column": "", "order": "升序"}
+    },
+    {
+      "id": "n004", "type": "LineChart", "display_name": "折线图",
+      "position": {"x": 650, "y": 50},
+      "params": {
+        "chart_width": 800, "chart_height": 500, "title": "趋势图", "title_font_size": 16,
+        "background_color": [255,255,255,255], "show_legend": true,
+        "x_column": "", "y_columns": [], "x_label": "", "y_label": "",
+        "x_range_auto": true, "y_range_auto": true
+      }
+    },
+    {
+      "id": "n005", "type": "BarChart", "display_name": "柱状图",
+      "position": {"x": 650, "y": 300},
+      "params": {
+        "chart_width": 800, "chart_height": 500, "title": "对比图", "title_font_size": 16,
+        "background_color": [255,255,255,255], "show_legend": true,
+        "category_column": "", "value_columns": [], "mode": "分组(Grouped)",
+        "bar_width_ratio": 0.7, "x_label": "", "y_label": ""
+      }
+    },
+    {
+      "id": "n006", "type": "ImageStack", "display_name": "上下拼接",
+      "position": {"x": 900, "y": 200},
+      "params": {"direction": "垂直（上下）", "alignment": "居中对齐", "gap": 20, "gap_color": [255,255,255,255]}
+    },
+    {
+      "id": "n007", "type": "ImageFileWrite", "display_name": "导出图表",
+      "position": {"x": 1100, "y": 220},
+      "params": {"file_path": "", "format": "PNG", "png_compression": 3, "jpeg_quality": 95}
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_data","to_node":"n002","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_data","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n003","from_port":"output_data","to_node":"n004","to_port":"input_data"},
+    {"from_node":"n003","from_port":"output_data","to_node":"n005","to_port":"input_data"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n006","to_port":"input_a"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n006","to_port":"input_b"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n007","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

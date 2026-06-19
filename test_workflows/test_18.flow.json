@@ -1,0 +1,81 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 18 - Conditional Branch Router",
+  "description": "Generate checkerboard, extract width as condition value. If width > 500, apply GaussianBlur (visible softening); otherwise apply Sharpen (visible edge enhancement). Tests conditional routing with meaningful visual results in both branches.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.75, "center_x": 500, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CheckerboardGenerate", "display_name": "生成800x600棋盘格",
+      "position": {"x": 50, "y": 80},
+      "params": {
+        "width": 800,
+        "height": 600,
+        "cell_size": 50,
+        "color_a": [40, 100, 40, 255],
+        "color_b": [200, 240, 200, 255]
+      }
+    },
+    {
+      "id": "n002", "type": "ImageInfo", "display_name": "提取宽度作为条件值",
+      "position": {"x": 280, "y": 30},
+      "params": {}
+    },
+    {
+      "id": "n003", "type": "ConditionalRouter", "display_name": "条件路由 width>500",
+      "position": {"x": 280, "y": 150},
+      "params": {
+        "operator": "大于",
+        "threshold": 500.0
+      }
+    },
+    {
+      "id": "n004", "type": "GaussianBlur", "display_name": "True分支-高斯模糊",
+      "position": {"x": 540, "y": 80},
+      "params": {
+        "kernel_size": 21,
+        "sigma": 10.0
+      }
+    },
+    {
+      "id": "n005", "type": "ImageFileWrite", "display_name": "导出True分支结果",
+      "position": {"x": 780, "y": 80},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_18_true_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n006", "type": "Sharpen", "display_name": "False分支-USM锐化",
+      "position": {"x": 540, "y": 220},
+      "params": {
+        "radius": 3,
+        "amount": 2.0,
+        "threshold": 0
+      }
+    },
+    {
+      "id": "n007", "type": "ImageFileWrite", "display_name": "导出False分支结果",
+      "position": {"x": 780, "y": 220},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_18_false_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n001","from_port":"output_image","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_width","to_node":"n003","to_port":"input_condition"},
+    {"from_node":"n003","from_port":"output_true","to_node":"n004","to_port":"input_image"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_false","to_node":"n006","to_port":"input_image"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n007","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

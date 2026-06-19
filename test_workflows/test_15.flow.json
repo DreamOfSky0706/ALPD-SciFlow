@@ -1,0 +1,62 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 15 - Pattern + Artistic Text Title",
+  "description": "Generate a CS pattern background, overlay artistic title text on it.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.9, "center_x": 400, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSPattern", "display_name": "生成电路板纹路图案",
+      "position": {"x": 50, "y": 100},
+      "params": {
+        "pattern_type": "电路板纹路",
+        "width": 1200,
+        "height": 400,
+        "primary_color": [30, 144, 255, 255],
+        "secondary_color": [100, 180, 255, 180],
+        "background_color": [10, 10, 30, 255],
+        "density": 1.0,
+        "line_width": 1,
+        "seed": 42
+      }
+    },
+    {
+      "id": "n002", "type": "ArtisticText", "display_name": "艺术标题字",
+      "position": {"x": 300, "y": 100},
+      "params": {
+        "text": "Scientific Computing",
+        "font_family": "",
+        "font_size": 64,
+        "fill_mode": "水平渐变",
+        "fill_color1": [0, 200, 255, 255],
+        "fill_color2": [100, 50, 255, 255],
+        "stroke_color": [255, 255, 255, 255],
+        "stroke_width": 2,
+        "shadow_enabled": true,
+        "shadow_color": [0, 0, 0, 128],
+        "shadow_offset_x": 4,
+        "shadow_offset_y": 4,
+        "shadow_blur": 6,
+        "letter_spacing": 2,
+        "position_x": -1,
+        "position_y": -1
+      }
+    },
+    {
+      "id": "n003", "type": "ImageFileWrite", "display_name": "导出结果",
+      "position": {"x": 550, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_15_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

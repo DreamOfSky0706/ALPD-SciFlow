@@ -1,0 +1,119 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n002",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n004",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_image",
+            "to_node": "n004",
+            "to_port": "input_watermark"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_image"
+        }
+    ],
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-16T00:52:56",
+    "nodes": [
+        {
+            "display_name": "读取图片",
+            "id": "n001",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"
+            },
+            "position": {
+                "x": 50,
+                "y": 80
+            },
+            "type": "ImageFileRead"
+        },
+        {
+            "display_name": "文字水印-DreamOfSky",
+            "id": "n002",
+            "params": {
+                "color": [
+                    255,
+                    255,
+                    255,
+                    128
+                ],
+                "font_family": "",
+                "font_size": 36,
+                "position": "右下",
+                "rotation": -30,
+                "text": "DreamOfSky",
+                "tiling": false
+            },
+            "position": {
+                "x": 320,
+                "y": -100
+            },
+            "type": "TextWatermark"
+        },
+        {
+            "display_name": "读取Logo水印图",
+            "id": "n003",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_watermark_logo.png"
+            },
+            "position": {
+                "x": 50,
+                "y": 200
+            },
+            "type": "ImageFileRead"
+        },
+        {
+            "display_name": "叠加Logo水印",
+            "id": "n004",
+            "params": {
+                "custom_x": 0,
+                "custom_y": 0,
+                "opacity": 0.6,
+                "position": "左上",
+                "scale": 0.15,
+                "tiling": false
+            },
+            "position": {
+                "x": 530,
+                "y": 80
+            },
+            "type": "ImageWatermark"
+        },
+        {
+            "display_name": "导出结果",
+            "id": "n005",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_09_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 780,
+                "y": 80
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "test_09"
+}

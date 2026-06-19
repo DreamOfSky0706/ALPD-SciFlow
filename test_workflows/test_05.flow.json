@@ -1,0 +1,57 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 05 - Channel Operations",
+  "description": "Split image into BGR channels, process B channel with Dilate, merge back.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.8, "center_x": 500, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "ImageFileRead", "display_name": "读取图片",
+      "position": {"x": 50, "y": 80},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"}
+    },
+    {
+      "id": "n002", "type": "ChannelSplit", "display_name": "拆分BGR通道",
+      "position": {"x": 280, "y": 80},
+      "params": {
+        "color_space": "BGR（拆为B/G/R）"
+      }
+    },
+    {
+      "id": "n003", "type": "Dilate", "display_name": "膨胀B通道",
+      "position": {"x": 510, "y": 50},
+      "params": {
+        "kernel_shape": "椭圆",
+        "kernel_size": 5,
+        "iterations": 2
+      }
+    },
+    {
+      "id": "n004", "type": "ChannelMerge", "display_name": "合并通道",
+      "position": {"x": 740, "y": 80},
+      "params": {
+        "color_space": "BGR"
+      }
+    },
+    {
+      "id": "n005", "type": "ImageFileWrite", "display_name": "导出结果",
+      "position": {"x": 970, "y": 80},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_05_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_ch0","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n004","to_port":"input_ch0"},
+    {"from_node":"n002","from_port":"output_ch1","to_node":"n004","to_port":"input_ch1"},
+    {"from_node":"n002","from_port":"output_ch2","to_node":"n004","to_port":"input_ch2"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

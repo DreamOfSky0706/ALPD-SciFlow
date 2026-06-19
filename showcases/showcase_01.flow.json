@@ -1,0 +1,286 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n006",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "ne0ac8dcc",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n1278a015",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n7bbfa138",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "nac17dd3c",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "ne0ac8dcc",
+            "from_port": "output_image",
+            "to_node": "n620ac8f5",
+            "to_port": "input_0"
+        },
+        {
+            "from_node": "n1278a015",
+            "from_port": "output_image",
+            "to_node": "n620ac8f5",
+            "to_port": "input_1"
+        },
+        {
+            "from_node": "n7bbfa138",
+            "from_port": "output_image",
+            "to_node": "n620ac8f5",
+            "to_port": "input_2"
+        },
+        {
+            "from_node": "n620ac8f5",
+            "from_port": "output_image",
+            "to_node": "n006",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "nac17dd3c",
+            "from_port": "output_image",
+            "to_node": "nbe86ff1e",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "nbe86ff1e",
+            "from_port": "output_image",
+            "to_node": "n620ac8f5",
+            "to_port": "input_3"
+        }
+    ],
+    "created_at": "2026-06-17T04:26:45",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T04:26:45",
+    "nodes": [
+        {
+            "display_name": "读取原始图片",
+            "id": "n001",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"
+            },
+            "position": {
+                "x": -300,
+                "y": -375
+            },
+            "type": "ImageFileRead"
+        },
+        {
+            "display_name": "艺术字标题",
+            "id": "n006",
+            "params": {
+                "fill_color1": [
+                    170,
+                    235,
+                    255,
+                    255
+                ],
+                "fill_color2": [
+                    60,
+                    30,
+                    200,
+                    255
+                ],
+                "fill_mode": "水平渐变",
+                "font_family": "华文中宋",
+                "font_size": 72,
+                "letter_spacing": 3,
+                "position_x": -1,
+                "position_y": -1,
+                "shadow_blur": 6,
+                "shadow_color": [
+                    0,
+                    0,
+                    0,
+                    160
+                ],
+                "shadow_enabled": false,
+                "shadow_offset_x": 4,
+                "shadow_offset_y": 4,
+                "stroke_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "stroke_width": 2,
+                "text": "图像·形态学·风格化"
+            },
+            "position": {
+                "x": 980,
+                "y": -375
+            },
+            "type": "ArtisticText"
+        },
+        {
+            "display_name": "导出最终作品",
+            "id": "n007",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\showcase_01_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 1300,
+                "y": -375
+            },
+            "type": "ImageFileWrite"
+        },
+        {
+            "display_name": "素描效果",
+            "id": "n1278a015",
+            "params": {
+                "contrast": 1.5,
+                "line_thickness": 1
+            },
+            "position": {
+                "x": 20,
+                "y": -300
+            },
+            "type": "SketchEffect"
+        },
+        {
+            "display_name": "多图排版",
+            "id": "n620ac8f5",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "canvas_height": 1080,
+                "canvas_width": 1920,
+                "cols": "2",
+                "dpi": 300,
+                "gap": 10,
+                "grid_config": {
+                    "cells": [
+                        {
+                            "c": 0,
+                            "enabled": true,
+                            "group": 0,
+                            "r": 0
+                        },
+                        {
+                            "c": 1,
+                            "enabled": true,
+                            "group": 1,
+                            "r": 0
+                        },
+                        {
+                            "c": 0,
+                            "enabled": true,
+                            "group": 2,
+                            "r": 1
+                        },
+                        {
+                            "c": 1,
+                            "enabled": true,
+                            "group": 3,
+                            "r": 1
+                        }
+                    ],
+                    "cols": 2,
+                    "rows": 2
+                },
+                "label_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "label_font_size": 14,
+                "label_style": "(a)(b)(c)...",
+                "outer_margin": 20,
+                "resize_mode": "等比缩放适配",
+                "rows": "2",
+                "show_labels": true,
+                "size_mode": "像素"
+            },
+            "position": {
+                "x": 660,
+                "y": -375
+            },
+            "type": "MultiImageLayout"
+        },
+        {
+            "display_name": "浮雕效果",
+            "id": "n7bbfa138",
+            "params": {
+                "direction": "左上",
+                "strength": 128
+            },
+            "position": {
+                "x": 20,
+                "y": -450
+            },
+            "type": "EmbossEffect"
+        },
+        {
+            "display_name": "转灰度",
+            "id": "nac17dd3c",
+            "params": {
+            },
+            "position": {
+                "x": 20,
+                "y": -600
+            },
+            "type": "ConvertToGray"
+        },
+        {
+            "display_name": "顶帽变换",
+            "id": "nbe86ff1e",
+            "params": {
+                "iterations": 1,
+                "kernel_shape": "矩形",
+                "kernel_size": 3
+            },
+            "position": {
+                "x": 340,
+                "y": -375
+            },
+            "type": "TopHat"
+        },
+        {
+            "display_name": "油画效果",
+            "id": "ne0ac8dcc",
+            "params": {
+                "brush_size": 7,
+                "smooth_level": 20
+            },
+            "position": {
+                "x": 20,
+                "y": -150
+            },
+            "type": "OilPaintEffect"
+        }
+    ],
+    "workflow_name": "showcase_01"
+}

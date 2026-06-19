@@ -1,0 +1,130 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n002",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n003",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_image",
+            "to_node": "n004",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_image"
+        }
+    ],
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-16T00:42:45",
+    "nodes": [
+        {
+            "display_name": "生成棋盘格",
+            "id": "n001",
+            "params": {
+                "cell_size": 50,
+                "color_a": [
+                    30,
+                    60,
+                    140,
+                    255
+                ],
+                "color_b": [
+                    240,
+                    200,
+                    80,
+                    255
+                ],
+                "height": 600,
+                "width": 600
+            },
+            "position": {
+                "x": -380,
+                "y": 180
+            },
+            "type": "CheckerboardGenerate"
+        },
+        {
+            "display_name": "裁剪中心400x400区域",
+            "id": "n002",
+            "params": {
+                "crop_height": 400,
+                "crop_width": 400,
+                "height": 400,
+                "width": 400,
+                "x": 100,
+                "y": 100
+            },
+            "position": {
+                "x": 80,
+                "y": 120
+            },
+            "type": "Crop"
+        },
+        {
+            "display_name": "旋转30度",
+            "id": "n003",
+            "params": {
+                "angle": 30,
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "interpolation": "双线性",
+                "keep_size": false
+            },
+            "position": {
+                "x": 400,
+                "y": 220
+            },
+            "type": "Rotate"
+        },
+        {
+            "display_name": "水平翻转",
+            "id": "n004",
+            "params": {
+                "direction": "水平翻转"
+            },
+            "position": {
+                "x": 740,
+                "y": 100
+            },
+            "type": "Flip"
+        },
+        {
+            "display_name": "导出结果",
+            "id": "n005",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_21_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 1220,
+                "y": 100
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "test_21"
+}

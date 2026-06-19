@@ -1,0 +1,412 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n002",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n003",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n004",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n006",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n009",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_0"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n005",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_1"
+        },
+        {
+            "from_node": "n006",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n007",
+            "from_port": "output_image",
+            "to_node": "n008",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n008",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_2"
+        },
+        {
+            "from_node": "n009",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_3"
+        },
+        {
+            "from_node": "n010",
+            "from_port": "output_image",
+            "to_node": "n011",
+            "to_port": "input_image"
+        }
+    ],
+    "created_at": "2026-06-17T04:39:51",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T04:39:51",
+    "nodes": [
+        {
+            "display_name": "读取原始显微/实验图像",
+            "id": "n001",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"
+            },
+            "position": {
+                "x": -300,
+                "y": -375
+            },
+            "type": "ImageFileRead"
+        },
+        {
+            "display_name": "转灰度图像",
+            "id": "n002",
+            "params": {
+            },
+            "position": {
+                "x": 20,
+                "y": -300
+            },
+            "type": "ConvertToGray"
+        },
+        {
+            "display_name": "子图(a) 编号标注",
+            "id": "n003",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    200
+                ],
+                "font_family": "",
+                "font_size": 18,
+                "label_text": "(a) 原始图像",
+                "padding": 6,
+                "position": "左上",
+                "text_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ]
+            },
+            "position": {
+                "x": 20,
+                "y": -450
+            },
+            "type": "NumberLabel"
+        },
+        {
+            "display_name": "Canny边缘检测(50/150)",
+            "id": "n004",
+            "params": {
+                "aperture_size": "3",
+                "threshold_high": 150,
+                "threshold_low": 50
+            },
+            "position": {
+                "x": 340,
+                "y": -225
+            },
+            "type": "CannyEdge"
+        },
+        {
+            "display_name": "子图(b) 编号标注",
+            "id": "n005",
+            "params": {
+                "background_color": [
+                    0,
+                    0,
+                    0,
+                    180
+                ],
+                "font_family": "",
+                "font_size": 18,
+                "label_text": "(b) 边缘检测",
+                "padding": 6,
+                "position": "左上",
+                "text_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ]
+            },
+            "position": {
+                "x": 660,
+                "y": -300
+            },
+            "type": "NumberLabel"
+        },
+        {
+            "display_name": "伪彩色热力图(蓝→红渐变)",
+            "id": "n006",
+            "params": {
+                "color_stops": [
+                    {
+                        "color": [
+                            10,
+                            50,
+                            180,
+                            255
+                        ],
+                        "pos": 0
+                    },
+                    {
+                        "color": [
+                            30,
+                            180,
+                            180,
+                            255
+                        ],
+                        "pos": 0.33
+                    },
+                    {
+                        "color": [
+                            180,
+                            210,
+                            50,
+                            255
+                        ],
+                        "pos": 0.66
+                    },
+                    {
+                        "color": [
+                            220,
+                            40,
+                            30,
+                            255
+                        ],
+                        "pos": 1
+                    }
+                ]
+            },
+            "position": {
+                "x": 340,
+                "y": -375
+            },
+            "type": "GradientMap"
+        },
+        {
+            "display_name": "比例尺绘制(10μm)",
+            "id": "n007",
+            "params": {
+                "background_enabled": true,
+                "bar_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "bar_height": 6,
+                "bar_length_unit": 10,
+                "font_size": 14,
+                "pixel_per_unit": 0.05,
+                "position": "左下",
+                "unit": "μm"
+            },
+            "position": {
+                "x": 660,
+                "y": -450
+            },
+            "type": "ScaleBar"
+        },
+        {
+            "display_name": "子图(c) 编号标注",
+            "id": "n008",
+            "params": {
+                "background_color": [
+                    0,
+                    0,
+                    0,
+                    180
+                ],
+                "font_family": "",
+                "font_size": 18,
+                "label_text": "(c) 伪彩色热力图",
+                "padding": 6,
+                "position": "左上",
+                "text_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ]
+            },
+            "position": {
+                "x": 980,
+                "y": -375
+            },
+            "type": "NumberLabel"
+        },
+        {
+            "display_name": "科研箭头与文字标注",
+            "id": "n009",
+            "params": {
+                "annotations": [
+                    {
+                        "color": [
+                            255,
+                            50,
+                            50,
+                            255
+                        ],
+                        "label": "目标区域",
+                        "line_width": 2,
+                        "type": "箭头",
+                        "x1": 100,
+                        "x2": 200,
+                        "y1": 80,
+                        "y2": 150
+                    },
+                    {
+                        "color": [
+                            50,
+                            180,
+                            50,
+                            255
+                        ],
+                        "label": "特征结构",
+                        "line_width": 2,
+                        "type": "箭头",
+                        "x1": 300,
+                        "x2": 400,
+                        "y1": 100,
+                        "y2": 200
+                    }
+                ]
+            },
+            "position": {
+                "x": 340,
+                "y": -525
+            },
+            "type": "Annotation"
+        },
+        {
+            "display_name": "2×2学术论文排版",
+            "id": "n010",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "canvas_height": 1300,
+                "canvas_width": 1700,
+                "cols": "2",
+                "dpi": 300,
+                "gap": 16,
+                "grid_config": {
+                    "cells": [
+                        {
+                            "c": 0,
+                            "enabled": true,
+                            "group": 0,
+                            "r": 0
+                        },
+                        {
+                            "c": 1,
+                            "enabled": true,
+                            "group": 1,
+                            "r": 0
+                        },
+                        {
+                            "c": 0,
+                            "enabled": true,
+                            "group": 2,
+                            "r": 1
+                        },
+                        {
+                            "c": 1,
+                            "enabled": true,
+                            "group": 3,
+                            "r": 1
+                        }
+                    ],
+                    "cols": 2,
+                    "rows": 2
+                },
+                "label_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "label_font_size": 14,
+                "label_style": "(a)(b)(c)...",
+                "outer_margin": 24,
+                "resize_mode": "等比缩放适配",
+                "rows": "2",
+                "show_labels": false,
+                "size_mode": "像素"
+            },
+            "position": {
+                "x": 1300,
+                "y": -375
+            },
+            "type": "MultiImageLayout"
+        },
+        {
+            "display_name": "导出学术论文插图",
+            "id": "n011",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\showcase_04_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 1620,
+                "y": -375
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "showcase_04"
+}

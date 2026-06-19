@@ -1,0 +1,160 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n002",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_image",
+            "to_node": "n003",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_image",
+            "to_node": "n004",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n005",
+            "to_port": "input_image"
+        }
+    ],
+    "created_at": "2026-06-17T00:52:23",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T00:52:23",
+    "nodes": [
+        {
+            "display_name": "读取显微图",
+            "id": "n001",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"
+            },
+            "position": {
+                "x": -300,
+                "y": -375
+            },
+            "type": "ImageFileRead"
+        },
+        {
+            "display_name": "添加比例尺10um",
+            "id": "n002",
+            "params": {
+                "background_enabled": true,
+                "bar_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "bar_height": 6,
+                "bar_length_unit": 200,
+                "font_size": 14,
+                "pixel_per_unit": 10,
+                "position": "右下",
+                "unit": "μm"
+            },
+            "position": {
+                "x": 20,
+                "y": -380
+            },
+            "type": "ScaleBar"
+        },
+        {
+            "display_name": "编号标签(a)",
+            "id": "n003",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    200
+                ],
+                "font_family": "Times New Roman",
+                "font_size": 20,
+                "label_text": "(a)",
+                "padding": 4,
+                "position": "左上",
+                "text_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ]
+            },
+            "position": {
+                "x": 340,
+                "y": -375
+            },
+            "type": "NumberLabel"
+        },
+        {
+            "display_name": "标注箭头",
+            "id": "n004",
+            "params": {
+                "annotations": [
+                    {
+                        "color": [
+                            255,
+                            0,
+                            0,
+                            255
+                        ],
+                        "end_x": 150,
+                        "end_y": 150,
+                        "line_width": 2,
+                        "start_x": 50,
+                        "start_y": 50,
+                        "type": "箭头"
+                    },
+                    {
+                        "color": [
+                            255,
+                            0,
+                            0,
+                            255
+                        ],
+                        "text": "region of interest",
+                        "text_size": 14,
+                        "text_x": 160,
+                        "text_y": 160,
+                        "type": "文字标签"
+                    }
+                ]
+            },
+            "position": {
+                "x": 660,
+                "y": -375
+            },
+            "type": "Annotation"
+        },
+        {
+            "display_name": "导出结果",
+            "id": "n005",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_10_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 980,
+                "y": -375
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "test_10"
+}

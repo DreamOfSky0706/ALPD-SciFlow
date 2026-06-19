@@ -1,0 +1,42 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 01 - Basic Single Image Processing",
+  "description": "Read an image, resize it to 400x300, and export as PNG.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 1.0, "center_x": 400, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001", "type": "ImageFileRead", "display_name": "读取输入图片",
+      "position": {"x": 50, "y": 100},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"}
+    },
+    {
+      "id": "n002", "type": "Resize", "display_name": "缩放到400x300",
+      "position": {"x": 300, "y": 100},
+      "params": {
+        "mode": "指定尺寸",
+        "target_width": 400,
+        "target_height": 300,
+        "keep_aspect_ratio": true,
+        "interpolation": "双线性",
+        "scale_factor": 1.0
+      }
+    },
+    {
+      "id": "n003", "type": "ImageFileWrite", "display_name": "导出结果",
+      "position": {"x": 550, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_01_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

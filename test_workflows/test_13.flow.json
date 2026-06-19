@@ -1,0 +1,120 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 13 - Multi-Chart Layout",
+  "description": "Read CSV data, generate LineChart, BarChart, and PieChart. Arrange them in a 2x2 layout with one empty cell.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.7, "center_x": 600, "center_y": 350 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSVRead", "display_name": "读取CSV数据",
+      "position": {"x": 50, "y": 150},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_data_multi.csv",
+        "delimiter": "逗号",
+        "has_header": true,
+        "encoding": "UTF-8"
+      }
+    },
+    {
+      "id": "n002", "type": "LineChart", "display_name": "折线图-趋势",
+      "position": {"x": 270, "y": 30},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "销售趋势",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "x_column": "月份",
+        "y_columns": "销售额",
+        "x_label": "月份",
+        "y_label": "万元",
+        "show_legend": true
+      }
+    },
+    {
+      "id": "n003", "type": "BarChart", "display_name": "柱状图-对比",
+      "position": {"x": 270, "y": 150},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "区域对比",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "category_column": "区域",
+        "value_columns": "销售额,利润",
+        "mode": "分组(Grouped)",
+        "x_label": "区域",
+        "y_label": "万元",
+        "show_legend": true,
+        "bar_width_ratio": 0.7
+      }
+    },
+    {
+      "id": "n004", "type": "PieChart", "display_name": "饼图-占比",
+      "position": {"x": 270, "y": 270},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "市场份额",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "label_column": "区域",
+        "value_column": "销售额",
+        "show_percentage": true,
+        "show_legend": true,
+        "explode_index": -1
+      }
+    },
+    {
+      "id": "n005", "type": "MultiImageLayout", "display_name": "2x2图表排版",
+      "position": {"x": 540, "y": 150},
+      "params": {
+        "rows": 2,
+        "cols": 2,
+        "grid_config": {
+          "rows": 2,
+          "cols": 2,
+          "cells": [
+            {"r":0,"c":0,"enabled":true,"group":0},
+            {"r":0,"c":1,"enabled":true,"group":1},
+            {"r":1,"c":0,"enabled":true,"group":2},
+            {"r":1,"c":1,"enabled":false,"group":3}
+          ]
+        },
+        "size_mode": "像素",
+        "canvas_width": 1300,
+        "canvas_height": 900,
+        "dpi": 300,
+        "gap": 10,
+        "outer_margin": 20,
+        "background_color": [255, 255, 255, 255],
+        "resize_mode": "等比缩放适配",
+        "show_labels": true,
+        "label_style": "(a)(b)(c)...",
+        "label_font_size": 14,
+        "label_color": [0, 0, 0, 255]
+      }
+    },
+    {
+      "id": "n006", "type": "ImageFileWrite", "display_name": "导出排版图",
+      "position": {"x": 810, "y": 150},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_13_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_data","to_node":"n002","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n004","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n005","to_port":"input_0"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n005","to_port":"input_1"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_2"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n006","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

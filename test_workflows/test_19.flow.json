@@ -1,0 +1,213 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 19 - Stress Test (20+ Nodes)",
+  "description": "Stress test combining 22 nodes: multiple image generators, filters, charts, layout, and decorations. Verifies the framework handles complex workflows.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.55, "center_x": 700, "center_y": 450 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CheckerboardGenerate", "display_name": "[1]棋盘格 400x300",
+      "position": {"x": 50, "y": 30},
+      "params": {
+        "width": 400, "height": 300, "cell_size": 30,
+        "color_a": [200, 40, 40, 255],
+        "color_b": [250, 200, 200, 255]
+      }
+    },
+    {
+      "id": "n002", "type": "GradientGenerate", "display_name": "[2]线性渐变 400x300",
+      "position": {"x": 50, "y": 140},
+      "params": {
+        "size_mode": "像素", "width": 400, "height": 300, "dpi": 300,
+        "gradient_type": "线性渐变",
+        "color_start": [20, 50, 120, 255],
+        "color_end": [200, 220, 255, 255],
+        "angle": 45.0,
+        "center_x": 0.5, "center_y": 0.5, "radius": 1.0
+      }
+    },
+    {
+      "id": "n003", "type": "NoiseGenerate", "display_name": "[3]Perlin噪声 400x300",
+      "position": {"x": 50, "y": 250},
+      "params": {
+        "width": 400, "height": 300, "noise_type": "Perlin噪声",
+        "seed": 123, "scale": 0.06, "octaves": 4
+      }
+    },
+    {
+      "id": "n004", "type": "CheckerboardGenerate", "display_name": "[4]棋盘格 400x300",
+      "position": {"x": 50, "y": 360},
+      "params": {
+        "width": 400, "height": 300, "cell_size": 40,
+        "color_a": [40, 40, 40, 255],
+        "color_b": [220, 220, 220, 255]
+      }
+    },
+    {
+      "id": "n005", "type": "GaussianBlur", "display_name": "[5]高斯模糊红图",
+      "position": {"x": 290, "y": 30},
+      "params": {"kernel_size": 11, "sigma": 4.0}
+    },
+    {
+      "id": "n006", "type": "MedianFilter", "display_name": "[6]中值滤波渐变",
+      "position": {"x": 290, "y": 140},
+      "params": {"kernel_size": 7}
+    },
+    {
+      "id": "n007", "type": "Sharpen", "display_name": "[7]锐化噪声",
+      "position": {"x": 290, "y": 250},
+      "params": {"radius": 2, "amount": 1.8, "threshold": 3}
+    },
+    {
+      "id": "n008", "type": "ConvertToGray", "display_name": "[8]转灰棋盘格",
+      "position": {"x": 290, "y": 360},
+      "params": {}
+    },
+    {
+      "id": "n009", "type": "Invert", "display_name": "[9]反色处理",
+      "position": {"x": 530, "y": 360},
+      "params": {}
+    },
+    {
+      "id": "n010", "type": "CSVRead", "display_name": "[10]读取CSV",
+      "position": {"x": 50, "y": 500},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_data.csv",
+        "delimiter": "逗号", "has_header": true, "encoding": "UTF-8"
+      }
+    },
+    {
+      "id": "n011", "type": "DataFilter", "display_name": "[11]数据过滤",
+      "position": {"x": 290, "y": 500},
+      "params": {"column": "销售额", "operator": "不为空", "value": ""}
+    },
+    {
+      "id": "n012", "type": "DataSort", "display_name": "[12]数据排序",
+      "position": {"x": 530, "y": 500},
+      "params": {"sort_key": "月份", "order": "升序"}
+    },
+    {
+      "id": "n013", "type": "LineChart", "display_name": "[13]折线图",
+      "position": {"x": 770, "y": 480},
+      "params": {
+        "chart_width": 500, "chart_height": 350, "title": "趋势",
+        "title_font_size": 12, "background_color": [255,255,255,255],
+        "x_column": "月份", "y_columns": "销售额",
+        "x_label": "月", "y_label": "万元", "show_legend": true
+      }
+    },
+    {
+      "id": "n014", "type": "BarChart", "display_name": "[14]柱状图",
+      "position": {"x": 770, "y": 140},
+      "params": {
+        "chart_width": 500, "chart_height": 350, "title": "对比",
+        "title_font_size": 12, "background_color": [255,255,255,255],
+        "category_column": "月份", "value_columns": "销售额",
+        "mode": "分组(Grouped)", "x_label": "月", "y_label": "万元",
+        "show_legend": true, "bar_width_ratio": 0.7
+      }
+    },
+    {
+      "id": "n015", "type": "MultiImageLayout", "display_name": "[15]2x2图排版",
+      "position": {"x": 530, "y": 140},
+      "params": {
+        "rows": "2", "cols": "2",
+        "grid_config": {
+          "rows": 2, "cols": 2,
+          "cells": [
+            {"r":0,"c":0,"enabled":true,"group":0},
+            {"r":0,"c":1,"enabled":true,"group":1},
+            {"r":1,"c":0,"enabled":true,"group":2},
+            {"r":1,"c":1,"enabled":true,"group":3}
+          ]
+        },
+        "size_mode": "像素", "canvas_width": 850, "canvas_height": 650, "dpi": 150,
+        "gap": 8, "outer_margin": 15,
+        "background_color": [240,240,240,255],
+        "resize_mode": "等比缩放适配", "show_labels": true,
+        "label_style": "(a)(b)(c)...", "label_font_size": 12,
+        "label_color": [0,0,0,255]
+      }
+    },
+    {
+      "id": "n016", "type": "ImageStack", "display_name": "[16]图表上下拼接",
+      "position": {"x": 1070, "y": 380},
+      "params": {
+        "direction": "垂直（上下）", "alignment": "居中对齐",
+        "gap": 10, "gap_color": [255,255,255,255]
+      }
+    },
+    {
+      "id": "n017", "type": "CanvasExtend", "display_name": "[17]画布扩展",
+      "position": {"x": 770, "y": 250},
+      "params": {
+        "top": 20, "bottom": 20, "left": 20, "right": 20,
+        "fill_color": [240, 240, 240, 255]
+      }
+    },
+    {
+      "id": "n018", "type": "BorderDecoration", "display_name": "[18]边框装饰",
+      "position": {"x": 1020, "y": 250},
+      "params": {
+        "border_width": 4, "border_color": [60, 60, 60, 255],
+        "corner_radius": 8,
+        "shadow_enabled": false,
+        "shadow_color": [0, 0, 0, 128],
+        "shadow_offset_x": 5, "shadow_offset_y": 5,
+        "shadow_blur_radius": 10
+      }
+    },
+    {
+      "id": "n019", "type": "DropShadow", "display_name": "[19]阴影效果",
+      "position": {"x": 1250, "y": 250},
+      "params": {
+        "shadow_color": [0, 0, 0, 100],
+        "offset_x": 6, "offset_y": 6,
+        "blur_radius": 12,
+        "background_color": [255, 255, 255, 255]
+      }
+    },
+    {
+      "id": "n020", "type": "ImageFileWrite", "display_name": "[20]导出最终结果",
+      "position": {"x": 1500, "y": 250},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_19_output.png",
+        "format": "PNG", "png_compression": 3, "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n021", "type": "ImageHistogramStats", "display_name": "[21]直方图统计",
+      "position": {"x": 530, "y": 30},
+      "params": {}
+    },
+    {
+      "id": "n022", "type": "DataSort", "display_name": "[22]二次排序",
+      "position": {"x": 770, "y": 30},
+      "params": {"sort_key": "销售额", "order": "降序"}
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n005","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n006","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n007","to_port":"input_image"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n008","to_port":"input_image"},
+    {"from_node":"n008","from_port":"output_image","to_node":"n009","to_port":"input_image"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n015","to_port":"input_0"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n015","to_port":"input_1"},
+    {"from_node":"n007","from_port":"output_image","to_node":"n015","to_port":"input_2"},
+    {"from_node":"n009","from_port":"output_image","to_node":"n015","to_port":"input_3"},
+    {"from_node":"n010","from_port":"output_data","to_node":"n011","to_port":"input_data"},
+    {"from_node":"n011","from_port":"output_data","to_node":"n012","to_port":"input_data"},
+    {"from_node":"n012","from_port":"output_data","to_node":"n013","to_port":"input_data"},
+    {"from_node":"n012","from_port":"output_data","to_node":"n014","to_port":"input_data"},
+    {"from_node":"n013","from_port":"output_image","to_node":"n016","to_port":"input_a"},
+    {"from_node":"n014","from_port":"output_image","to_node":"n016","to_port":"input_b"},
+    {"from_node":"n015","from_port":"output_image","to_node":"n017","to_port":"input_image"},
+    {"from_node":"n017","from_port":"output_image","to_node":"n018","to_port":"input_image"},
+    {"from_node":"n018","from_port":"output_image","to_node":"n019","to_port":"input_image"},
+    {"from_node":"n019","from_port":"output_image","to_node":"n020","to_port":"input_image"},
+    {"from_node":"n001","from_port":"output_image","to_node":"n021","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

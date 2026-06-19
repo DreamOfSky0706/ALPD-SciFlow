@@ -1,0 +1,80 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 12 - Complex Data Pipeline",
+  "description": "Read CSV with missing values, fill with column mean, normalize, sort, then bar chart.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.8, "center_x": 600, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSVRead", "display_name": "读取含缺失值CSV",
+      "position": {"x": 50, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_data_missing.csv",
+        "delimiter": "逗号",
+        "has_header": true,
+        "encoding": "UTF-8"
+      }
+    },
+    {
+      "id": "n002", "type": "HandleMissing", "display_name": "填充列均值",
+      "position": {"x": 270, "y": 100},
+      "params": {
+        "method": "填充列均值",
+        "fill_value": "0"
+      }
+    },
+    {
+      "id": "n003", "type": "DataNormalize", "display_name": "Min-Max归一化",
+      "position": {"x": 500, "y": 100},
+      "params": {
+        "target_key": "数值",
+        "method": "Min-Max归一化(映射到0-1)"
+      }
+    },
+    {
+      "id": "n004", "type": "DataSort", "display_name": "按类别排序",
+      "position": {"x": 730, "y": 100},
+      "params": {
+        "sort_key": "类别",
+        "order": "升序"
+      }
+    },
+    {
+      "id": "n005", "type": "BarChart", "display_name": "柱状图",
+      "position": {"x": 960, "y": 100},
+      "params": {
+        "chart_width": 800,
+        "chart_height": 500,
+        "title": "归一化数据对比",
+        "title_font_size": 16,
+        "background_color": [255, 255, 255, 255],
+        "category_column": "类别",
+        "value_columns": "数值",
+        "mode": "分组(Grouped)",
+        "x_label": "类别",
+        "y_label": "归一化数值",
+        "show_legend": true,
+        "bar_width_ratio": 0.7
+      }
+    },
+    {
+      "id": "n006", "type": "ImageFileWrite", "display_name": "导出图表",
+      "position": {"x": 1210, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_12_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_data","to_node":"n002","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_data","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n003","from_port":"output_data","to_node":"n004","to_port":"input_data"},
+    {"from_node":"n004","from_port":"output_data","to_node":"n005","to_port":"input_data"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n006","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

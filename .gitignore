@@ -1,0 +1,53 @@
+# Build outputs
+build/
+x64/
+Debug/
+Release/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+
+# VS
+.vs/
+*.user
+*.suo
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+ImageNodeTool/
+
+# Qt autogen
+*_autogen/
+mocs_compilation_*.cpp
+qrc_*.cpp
+
+# Temp / garbage
+C:
+_pkg/
+_tmp_*
+_pkg
+thirdparty/
+src/
+*.zip
+*.rar
+
+# Desktop test output files (generated during testing)
+*_output.png
+*_output.txt
+*_output.csv
+*_chart.png
+*_pivot.csv
+*_report.txt
+showcase_*_output/
+test_*_output/
+test_batch_output/
+test_28_output/
+
+# Legacy / unrelated
+节点式图像处理工作流工具-SciFlow/
+*.mp4
+

@@ -1,0 +1,522 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_data",
+            "to_node": "n002",
+            "to_port": "input_data"
+        },
+        {
+            "from_node": "n002",
+            "from_port": "output_data",
+            "to_node": "n003",
+            "to_port": "input_data"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_data",
+            "to_node": "n004",
+            "to_port": "input_data"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_data",
+            "to_node": "n005",
+            "to_port": "input_data"
+        },
+        {
+            "from_node": "n003",
+            "from_port": "output_data",
+            "to_node": "n006",
+            "to_port": "input_data"
+        },
+        {
+            "from_node": "n004",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_0"
+        },
+        {
+            "from_node": "n005",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_1"
+        },
+        {
+            "from_node": "n006",
+            "from_port": "output_image",
+            "to_node": "n007",
+            "to_port": "input_2"
+        },
+        {
+            "from_node": "n007",
+            "from_port": "output_image",
+            "to_node": "n009",
+            "to_port": "input_a"
+        },
+        {
+            "from_node": "n009",
+            "from_port": "output_image",
+            "to_node": "n010",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n010",
+            "from_port": "output_image",
+            "to_node": "n011",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n011",
+            "from_port": "output_image",
+            "to_node": "n012",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n012",
+            "from_port": "output_image",
+            "to_node": "n013",
+            "to_port": "input_image"
+        },
+        {
+            "from_node": "n7329038a",
+            "from_port": "output_image",
+            "to_node": "n009",
+            "to_port": "input_b"
+        }
+    ],
+    "created_at": "2026-06-17T04:35:09",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T04:35:09",
+    "nodes": [
+        {
+            "display_name": "读取销售数据CSV",
+            "id": "n001",
+            "params": {
+                "delimiter": "逗号",
+                "encoding": "UTF-8",
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_data_multi.csv",
+                "has_header": true
+            },
+            "position": {
+                "x": -300,
+                "y": -300
+            },
+            "type": "CSVRead"
+        },
+        {
+            "display_name": "过滤有效数据(销售额不为空)",
+            "id": "n002",
+            "params": {
+                "column": "销售额",
+                "operator": "不为空",
+                "value": ""
+            },
+            "position": {
+                "x": 20,
+                "y": -375
+            },
+            "type": "DataFilter"
+        },
+        {
+            "display_name": "按月份升序排列",
+            "id": "n003",
+            "params": {
+                "order": "升序",
+                "sort_key": "月份"
+            },
+            "position": {
+                "x": 340,
+                "y": -375
+            },
+            "type": "DataSort"
+        },
+        {
+            "display_name": "月度销售趋势折线图",
+            "id": "n004",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "chart_height": 380,
+                "chart_width": 550,
+                "show_legend": true,
+                "title": "月度销售趋势",
+                "title_font_size": 15,
+                "x_column": "月份",
+                "x_label": "月份",
+                "y_columns": "销售额",
+                "y_label": "销售额(万元)"
+            },
+            "position": {
+                "x": 660,
+                "y": -225
+            },
+            "type": "LineChart"
+        },
+        {
+            "display_name": "月度销售对比柱状图",
+            "id": "n005",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "bar_width_ratio": 0.7,
+                "category_column": "月份",
+                "chart_height": 380,
+                "chart_width": 550,
+                "mode": "分组(Grouped)",
+                "show_legend": true,
+                "title": "月度销售与利润对比",
+                "title_font_size": 15,
+                "value_columns": "销售额,利润",
+                "x_label": "月份",
+                "y_label": "金额(万元)"
+            },
+            "position": {
+                "x": 660,
+                "y": -375
+            },
+            "type": "BarChart"
+        },
+        {
+            "display_name": "月度销售额占比饼图",
+            "id": "n006",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "chart_height": 380,
+                "chart_width": 550,
+                "explode_index": 0,
+                "label_column": "月份",
+                "show_legend": true,
+                "show_percentage": true,
+                "title": "月度销售额占比",
+                "title_font_size": 15,
+                "value_column": "销售额"
+            },
+            "position": {
+                "x": 660,
+                "y": -525
+            },
+            "type": "PieChart"
+        },
+        {
+            "display_name": "三图仪表盘排版(1行3列)",
+            "id": "n007",
+            "params": {
+                "background_color": [
+                    250,
+                    250,
+                    252,
+                    255
+                ],
+                "canvas_height": 440,
+                "canvas_width": 1750,
+                "cols": "3",
+                "dpi": 150,
+                "gap": 20,
+                "grid_config": {
+                    "cells": [
+                        {
+                            "c": 0,
+                            "enabled": true,
+                            "group": 0,
+                            "r": 0
+                        },
+                        {
+                            "c": 1,
+                            "enabled": true,
+                            "group": 1,
+                            "r": 0
+                        },
+                        {
+                            "c": 2,
+                            "enabled": true,
+                            "group": 2,
+                            "r": 0
+                        }
+                    ],
+                    "cols": 3,
+                    "rows": 1
+                },
+                "label_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "label_font_size": 12,
+                "label_style": "(a)(b)(c)...",
+                "outer_margin": 25,
+                "resize_mode": "等比缩放适配",
+                "rows": "1",
+                "show_labels": false,
+                "size_mode": "像素"
+            },
+            "position": {
+                "x": 980,
+                "y": -375
+            },
+            "type": "MultiImageLayout"
+        },
+        {
+            "display_name": "图表与流程图垂直拼接",
+            "id": "n009",
+            "params": {
+                "alignment": "居中对齐",
+                "direction": "垂直（上下）",
+                "gap": 15,
+                "gap_color": [
+                    240,
+                    240,
+                    245,
+                    255
+                ]
+            },
+            "position": {
+                "x": 1300,
+                "y": -375
+            },
+            "type": "ImageStack"
+        },
+        {
+            "display_name": "画布扩展留白(30px)",
+            "id": "n010",
+            "params": {
+                "bottom": 30,
+                "fill_color": [
+                    245,
+                    245,
+                    248,
+                    255
+                ],
+                "left": 30,
+                "right": 30,
+                "top": 30
+            },
+            "position": {
+                "x": 1620,
+                "y": -375
+            },
+            "type": "CanvasExtend"
+        },
+        {
+            "display_name": "边框美化(圆角+阴影)",
+            "id": "n011",
+            "params": {
+                "border_color": [
+                    60,
+                    65,
+                    75,
+                    255
+                ],
+                "border_width": 3,
+                "corner_radius": 10,
+                "shadow_blur_radius": 12,
+                "shadow_color": [
+                    0,
+                    0,
+                    0,
+                    80
+                ],
+                "shadow_enabled": true,
+                "shadow_offset_x": 4,
+                "shadow_offset_y": 4
+            },
+            "position": {
+                "x": 1940,
+                "y": -375
+            },
+            "type": "BorderDecoration"
+        },
+        {
+            "display_name": "叠加总标题",
+            "id": "n012",
+            "params": {
+                "alignment": "左对齐",
+                "color": [
+                    40,
+                    50,
+                    70,
+                    255
+                ],
+                "font_family": "",
+                "font_size": 28,
+                "line_spacing": 1.2,
+                "stroke_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "stroke_width": 2,
+                "text": "销售数据可视化仪表盘",
+                "x": 30,
+                "y": 38
+            },
+            "position": {
+                "x": 2260,
+                "y": -375
+            },
+            "type": "TextOverlay"
+        },
+        {
+            "display_name": "导出最终仪表盘",
+            "id": "n013",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\showcase_02_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 2580,
+                "y": -375
+            },
+            "type": "ImageFileWrite"
+        },
+        {
+            "display_name": "流程图自动布局",
+            "id": "n7329038a",
+            "params": {
+                "canvas_height": 1200,
+                "canvas_width": 900,
+                "color_scheme": "科技蓝",
+                "direction": "自左而右",
+                "font_size": 14,
+                "h_gap": 80,
+                "node_height": 50,
+                "node_width": 140,
+                "steps": [
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "step1"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            240,
+                            200,
+                            255
+                        ],
+                        "logic_type": "开始",
+                        "step_id": "start",
+                        "step_name": "开始"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "decision"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            220,
+                            255,
+                            255
+                        ],
+                        "logic_type": "过程/操作",
+                        "step_id": "step1",
+                        "step_name": "图像预处理"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "是",
+                                "target": "step2_yes"
+                            },
+                            {
+                                "label": "否",
+                                "target": "step3_no"
+                            }
+                        ],
+                        "fill_color": [
+                            255,
+                            255,
+                            200,
+                            255
+                        ],
+                        "logic_type": "判断/分支",
+                        "step_id": "decision",
+                        "step_name": "质量合格?"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "end"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            220,
+                            255,
+                            255
+                        ],
+                        "logic_type": "过程/操作",
+                        "step_id": "step2_yes",
+                        "step_name": "数据分析"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "step1"
+                            }
+                        ],
+                        "fill_color": [
+                            255,
+                            220,
+                            200,
+                            255
+                        ],
+                        "logic_type": "子流程",
+                        "step_id": "step3_no",
+                        "step_name": "重新采集"
+                    },
+                    {
+                        "connections": [
+                        ],
+                        "fill_color": [
+                            255,
+                            200,
+                            200,
+                            255
+                        ],
+                        "logic_type": "结束",
+                        "step_id": "end",
+                        "step_name": "结束"
+                    }
+                ],
+                "v_gap": 60
+            },
+            "position": {
+                "x": -300,
+                "y": -450
+            },
+            "type": "FlowchartAutoLayout"
+        }
+    ],
+    "workflow_name": "showcase_02"
+}

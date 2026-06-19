@@ -1,0 +1,182 @@
+{
+    "canvas_view": {
+        "center_x": 400,
+        "center_y": 300,
+        "zoom": 1
+    },
+    "connections": [
+        {
+            "from_node": "n001",
+            "from_port": "output_image",
+            "to_node": "n002",
+            "to_port": "input_image"
+        }
+    ],
+    "created_at": "2026-06-17T00:43:59",
+    "execution_order_hints": [
+    ],
+    "format_version": "1.0",
+    "modified_at": "2026-06-17T00:43:59",
+    "nodes": [
+        {
+            "display_name": "自动布局流程图",
+            "id": "n001",
+            "params": {
+                "background_color": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
+                "border_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "border_width": 2,
+                "canvas_height": 1200,
+                "canvas_width": 900,
+                "color_scheme": "科技蓝",
+                "connector_style": "折线箭头",
+                "direction": "自左而右",
+                "element_height": 60,
+                "element_width": 130,
+                "font_color": [
+                    0,
+                    0,
+                    0,
+                    255
+                ],
+                "font_size": 14,
+                "h_spacing": 60,
+                "steps": [
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "step1"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            240,
+                            200,
+                            255
+                        ],
+                        "logic_type": "开始",
+                        "step_id": "start",
+                        "step_name": "开始"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "decision"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            220,
+                            255,
+                            255
+                        ],
+                        "logic_type": "过程/操作",
+                        "step_id": "step1",
+                        "step_name": "图像预处理"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "是",
+                                "target": "step2_yes"
+                            },
+                            {
+                                "label": "否",
+                                "target": "step3_no"
+                            }
+                        ],
+                        "fill_color": [
+                            255,
+                            255,
+                            200,
+                            255
+                        ],
+                        "logic_type": "判断/分支",
+                        "step_id": "decision",
+                        "step_name": "质量合格?"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "end"
+                            }
+                        ],
+                        "fill_color": [
+                            200,
+                            220,
+                            255,
+                            255
+                        ],
+                        "logic_type": "过程/操作",
+                        "step_id": "step2_yes",
+                        "step_name": "数据分析"
+                    },
+                    {
+                        "connections": [
+                            {
+                                "label": "",
+                                "target": "step1"
+                            }
+                        ],
+                        "fill_color": [
+                            255,
+                            220,
+                            200,
+                            255
+                        ],
+                        "logic_type": "子流程",
+                        "step_id": "step3_no",
+                        "step_name": "重新采集"
+                    },
+                    {
+                        "connections": [
+                        ],
+                        "fill_color": [
+                            255,
+                            200,
+                            200,
+                            255
+                        ],
+                        "logic_type": "结束",
+                        "step_id": "end",
+                        "step_name": "结束"
+                    }
+                ],
+                "v_spacing": 80
+            },
+            "position": {
+                "x": -40,
+                "y": 120
+            },
+            "type": "FlowchartAutoLayout"
+        },
+        {
+            "display_name": "导出流程图",
+            "id": "n002",
+            "params": {
+                "file_path": "C:\\Users\\lenovo\\Desktop\\test_14_output.png",
+                "format": "PNG",
+                "jpeg_quality": 95,
+                "png_compression": 3
+            },
+            "position": {
+                "x": 300,
+                "y": 100
+            },
+            "type": "ImageFileWrite"
+        }
+    ],
+    "workflow_name": "test_14"
+}

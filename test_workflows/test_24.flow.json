@@ -1,0 +1,122 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 24 - Distribution and Advanced Charts",
+  "description": "Read CSV data and generate Histogram, BoxPlot, and ScatterPlot in parallel, then arrange them in a 2x2 layout.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.65, "center_x": 600, "center_y": 350 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CSVRead", "display_name": "读取分布数据CSV",
+      "position": {"x": 50, "y": 150},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_data_distribution.csv",
+        "delimiter": "逗号",
+        "has_header": true,
+        "encoding": "UTF-8"
+      }
+    },
+    {
+      "id": "n002", "type": "Histogram", "display_name": "直方图",
+      "position": {"x": 270, "y": 30},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "数值分布直方图",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "value_column": "数值",
+        "num_bins": 10,
+        "x_label": "数值区间",
+        "y_label": "频次",
+        "color": [70, 130, 180, 200],
+        "show_stats": true
+      }
+    },
+    {
+      "id": "n003", "type": "BoxPlot", "display_name": "箱线图",
+      "position": {"x": 270, "y": 150},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "分组箱线图",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "category_column": "类别",
+        "value_column": "数值",
+        "x_label": "类别",
+        "y_label": "数值",
+        "show_outliers": true,
+        "color_scheme": "默认"
+      }
+    },
+    {
+      "id": "n004", "type": "ScatterPlot", "display_name": "散点图",
+      "position": {"x": 270, "y": 270},
+      "params": {
+        "chart_width": 600,
+        "chart_height": 400,
+        "title": "X-Y散点分布",
+        "title_font_size": 14,
+        "background_color": [255, 255, 255, 255],
+        "x_column": "指标X",
+        "y_column": "指标Y",
+        "x_label": "指标X",
+        "y_label": "指标Y",
+        "point_size": 8,
+        "point_color": [200, 80, 60, 200],
+        "show_trendline": true
+      }
+    },
+    {
+      "id": "n005", "type": "MultiImageLayout", "display_name": "2x2图表排版",
+      "position": {"x": 540, "y": 150},
+      "params": {
+        "rows": "2",
+        "cols": "2",
+        "grid_config": {
+          "rows": 2,
+          "cols": 2,
+          "cells": [
+            {"r":0,"c":0,"enabled":true,"group":0},
+            {"r":0,"c":1,"enabled":true,"group":1},
+            {"r":1,"c":0,"enabled":true,"group":2},
+            {"r":1,"c":1,"enabled":false,"group":3}
+          ]
+        },
+        "size_mode": "像素",
+        "canvas_width": 1300,
+        "canvas_height": 900,
+        "dpi": 150,
+        "gap": 10,
+        "outer_margin": 20,
+        "background_color": [255, 255, 255, 255],
+        "resize_mode": "等比缩放适配",
+        "show_labels": true,
+        "label_style": "(a)(b)(c)...",
+        "label_font_size": 14,
+        "label_color": [0, 0, 0, 255]
+      }
+    },
+    {
+      "id": "n006", "type": "ImageFileWrite", "display_name": "导出排版图",
+      "position": {"x": 810, "y": 150},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_24_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_data","to_node":"n002","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n003","to_port":"input_data"},
+    {"from_node":"n001","from_port":"output_data","to_node":"n004","to_port":"input_data"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n005","to_port":"input_0"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n005","to_port":"input_1"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_2"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n006","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

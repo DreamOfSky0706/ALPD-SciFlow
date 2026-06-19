@@ -1,0 +1,95 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 23 - Alternative Edge Detection Methods",
+  "description": "Generate checkerboard, convert to gray, then apply Sobel, Laplacian, and AdaptiveThreshold in parallel to compare edge detection methods.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.7, "center_x": 500, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CheckerboardGenerate", "display_name": "生成棋盘格",
+      "position": {"x": 50, "y": 100},
+      "params": {
+        "width": 400,
+        "height": 400,
+        "cell_size": 40,
+        "color_a": [30, 30, 30, 255],
+        "color_b": [225, 225, 225, 255]
+      }
+    },
+    {
+      "id": "n002", "type": "ConvertToGray", "display_name": "转灰度",
+      "position": {"x": 270, "y": 100},
+      "params": {}
+    },
+    {
+      "id": "n003", "type": "Sobel", "display_name": "Sobel边缘检测",
+      "position": {"x": 500, "y": 40},
+      "params": {
+        "dx": 1,
+        "dy": 0,
+        "kernel_size": "3",
+        "normalize": true
+      }
+    },
+    {
+      "id": "n004", "type": "Laplacian", "display_name": "Laplacian边缘检测",
+      "position": {"x": 500, "y": 140},
+      "params": {
+        "kernel_size": "3",
+        "normalize": true
+      }
+    },
+    {
+      "id": "n005", "type": "AdaptiveThreshold", "display_name": "自适应阈值",
+      "position": {"x": 500, "y": 240},
+      "params": {
+        "max_value": 255,
+        "adaptive_method": "高斯加权平均",
+        "type": "二值化(BINARY)",
+        "block_size": 11,
+        "C": 2.0
+      }
+    },
+    {
+      "id": "n006", "type": "ImageFileWrite", "display_name": "导出Sobel结果",
+      "position": {"x": 750, "y": 40},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_23_sobel_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n007", "type": "ImageFileWrite", "display_name": "导出Laplacian结果",
+      "position": {"x": 750, "y": 140},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_23_laplacian_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n008", "type": "ImageFileWrite", "display_name": "导出自适应阈值结果",
+      "position": {"x": 750, "y": 240},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_23_adaptive_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n004","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n005","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n006","to_port":"input_image"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n007","to_port":"input_image"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n008","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

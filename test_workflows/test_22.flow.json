@@ -1,0 +1,133 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 22 - Morphology Compound Operations",
+  "description": "Generate checkerboard, binarize with Otsu threshold, then apply morphological close, gradient, top-hat, and black-hat operations to verify compound morphology correctness.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.75, "center_x": 500, "center_y": 300 },
+  "nodes": [
+    {
+      "id": "n001", "type": "CheckerboardGenerate", "display_name": "生成棋盘格",
+      "position": {"x": 50, "y": 80},
+      "params": {
+        "width": 400,
+        "height": 400,
+        "cell_size": 40,
+        "color_a": [20, 20, 20, 255],
+        "color_b": [230, 230, 230, 255]
+      }
+    },
+    {
+      "id": "n002", "type": "ConvertToGray", "display_name": "转灰度",
+      "position": {"x": 270, "y": 80},
+      "params": {}
+    },
+    {
+      "id": "n003", "type": "OtsuThreshold", "display_name": "Otsu自动二值化",
+      "position": {"x": 490, "y": 80},
+      "params": {
+        "max_value": 255,
+        "type": "二值化(BINARY)"
+      }
+    },
+    {
+      "id": "n004", "type": "MorphOpen", "display_name": "开运算",
+      "position": {"x": 490, "y": 180},
+      "params": {
+        "kernel_shape": "矩形",
+        "kernel_size": 5,
+        "iterations": 1
+      }
+    },
+    {
+      "id": "n005", "type": "MorphClose", "display_name": "闭运算",
+      "position": {"x": 720, "y": 40},
+      "params": {
+        "kernel_shape": "矩形",
+        "kernel_size": 5,
+        "iterations": 1
+      }
+    },
+    {
+      "id": "n006", "type": "MorphGradient", "display_name": "形态学梯度",
+      "position": {"x": 720, "y": 130},
+      "params": {
+        "kernel_shape": "矩形",
+        "kernel_size": 3,
+        "iterations": 1
+      }
+    },
+    {
+      "id": "n007", "type": "TopHat", "display_name": "顶帽变换",
+      "position": {"x": 720, "y": 220},
+      "params": {
+        "kernel_shape": "矩形",
+        "kernel_size": 9,
+        "iterations": 1
+      }
+    },
+    {
+      "id": "n008", "type": "BlackHat", "display_name": "黑帽变换",
+      "position": {"x": 720, "y": 310},
+      "params": {
+        "kernel_shape": "矩形",
+        "kernel_size": 9,
+        "iterations": 1
+      }
+    },
+    {
+      "id": "n009", "type": "ImageFileWrite", "display_name": "导出闭运算结果",
+      "position": {"x": 960, "y": 40},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_22_close_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n010", "type": "ImageFileWrite", "display_name": "导出梯度结果",
+      "position": {"x": 960, "y": 130},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_22_gradient_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n011", "type": "ImageFileWrite", "display_name": "导出顶帽结果",
+      "position": {"x": 960, "y": 220},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_22_tophat_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    },
+    {
+      "id": "n012", "type": "ImageFileWrite", "display_name": "导出黑帽结果",
+      "position": {"x": 960, "y": 310},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_22_blackhat_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n004","to_port":"input_image"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_image"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n009","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n006","to_port":"input_image"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n010","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n007","to_port":"input_image"},
+    {"from_node":"n007","from_port":"output_image","to_node":"n011","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n008","to_port":"input_image"},
+    {"from_node":"n008","from_port":"output_image","to_node":"n012","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

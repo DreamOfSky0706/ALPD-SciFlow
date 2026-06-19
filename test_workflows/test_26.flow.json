@@ -1,0 +1,42 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 26 - Professional Image Enhancement & Comparison",
+  "created_at": "2026-06-15T00:00:00",
+  "modified_at": "2026-06-15T00:00:00",
+  "canvas_view": { "zoom": 0.8, "center_x": 400, "center_y": 250 },
+  "nodes": [
+    {
+      "id": "n001", "type": "ImageFileRead", "display_name": "读取原图",
+      "position": {"x": 50, "y": 100},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"}
+    },
+    {
+      "id": "n002", "type": "Clahe", "display_name": "CLAHE增强",
+      "position": {"x": 280, "y": 50},
+      "params": {"clip_limit": 2.0, "tile_size": 8}
+    },
+    {
+      "id": "n003", "type": "GaussianBlur", "display_name": "高斯模糊对比",
+      "position": {"x": 280, "y": 160},
+      "params": {"kernel_size": 5, "sigma": 2.0}
+    },
+    {
+      "id": "n004", "type": "ImageDiff", "display_name": "差异对比(CLAHE vs Blur)",
+      "position": {"x": 530, "y": 100},
+      "params": {"mode": "差值图", "threshold": 30}
+    },
+    {
+      "id": "n005", "type": "ImageFileWrite", "display_name": "导出结果",
+      "position": {"x": 780, "y": 100},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_26_output.png", "format": "PNG", "png_compression": 3, "jpeg_quality": 95}
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n001","from_port":"output_image","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n004","to_port":"input_a"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n004","to_port":"input_b"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

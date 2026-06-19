@@ -1,0 +1,126 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 25 - Drawing Primitives",
+  "description": "Create a blank canvas and draw various geometric shapes (rectangle, rounded rect, ellipse, diamond, arrow, curve) to verify drawing node correctness.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 0.75, "center_x": 700, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001", "type": "BlankCanvas", "display_name": "创建空白画布",
+      "position": {"x": 50, "y": 100},
+      "params": {
+        "width": 800,
+        "height": 600,
+        "background_color": [250, 250, 250, 255]
+      }
+    },
+    {
+      "id": "n002", "type": "DrawRectangle", "display_name": "绘制矩形",
+      "position": {"x": 280, "y": 30},
+      "params": {
+        "x": 50,
+        "y": 50,
+        "width": 150,
+        "height": 100,
+        "fill_color": [100, 150, 220, 200],
+        "stroke_color": [30, 60, 120, 255],
+        "stroke_width": 3,
+        "corner_radius": 0
+      }
+    },
+    {
+      "id": "n003", "type": "DrawRoundedRect", "display_name": "绘制圆角矩形",
+      "position": {"x": 280, "y": 130},
+      "params": {
+        "x": 250,
+        "y": 50,
+        "width": 150,
+        "height": 100,
+        "corner_radius": 20,
+        "fill_color": [220, 150, 100, 200],
+        "stroke_color": [140, 60, 20, 255],
+        "stroke_width": 3
+      }
+    },
+    {
+      "id": "n004", "type": "DrawEllipse", "display_name": "绘制椭圆",
+      "position": {"x": 280, "y": 230},
+      "params": {
+        "cx": 525,
+        "cy": 100,
+        "rx": 80,
+        "ry": 50,
+        "fill_color": [100, 200, 120, 200],
+        "stroke_color": [20, 120, 40, 255],
+        "stroke_width": 3
+      }
+    },
+    {
+      "id": "n005", "type": "DrawDiamond", "display_name": "绘制菱形",
+      "position": {"x": 280, "y": 330},
+      "params": {
+        "cx": 200,
+        "cy": 300,
+        "width": 120,
+        "height": 90,
+        "fill_color": [200, 130, 200, 200],
+        "stroke_color": [100, 30, 120, 255],
+        "stroke_width": 3
+      }
+    },
+    {
+      "id": "n006", "type": "DrawArrow", "display_name": "绘制箭头",
+      "position": {"x": 530, "y": 30},
+      "params": {
+        "x1": 400,
+        "y1": 280,
+        "x2": 550,
+        "y2": 150,
+        "arrow_head": true,
+        "arrow_size": 12,
+        "color": [220, 50, 50, 255],
+        "line_width": 3,
+        "line_style": "实线"
+      }
+    },
+    {
+      "id": "n007", "type": "DrawCurve", "display_name": "绘制贝塞尔曲线",
+      "position": {"x": 530, "y": 130},
+      "params": {
+        "start_x": 450,
+        "start_y": 350,
+        "control1_x": 520,
+        "control1_y": 250,
+        "control2_x": 620,
+        "control2_y": 420,
+        "end_x": 680,
+        "end_y": 320,
+        "color": [50, 100, 200, 255],
+        "line_width": 3,
+        "line_style": "实线",
+        "show_control_points": false
+      }
+    },
+    {
+      "id": "n008", "type": "ImageFileWrite", "display_name": "导出绘图结果",
+      "position": {"x": 780, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_25_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n004","to_port":"input_image"},
+    {"from_node":"n004","from_port":"output_image","to_node":"n005","to_port":"input_image"},
+    {"from_node":"n005","from_port":"output_image","to_node":"n006","to_port":"input_image"},
+    {"from_node":"n006","from_port":"output_image","to_node":"n007","to_port":"input_image"},
+    {"from_node":"n007","from_port":"output_image","to_node":"n008","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}

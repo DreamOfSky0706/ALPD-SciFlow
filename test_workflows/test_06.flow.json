@@ -1,0 +1,45 @@
+{
+  "format_version": "1.0",
+  "workflow_name": "Test 06 - Edge Detection Pipeline",
+  "description": "Read image, convert to grayscale, apply Canny edge detection.",
+  "created_at": "2026-06-14T00:00:00",
+  "modified_at": "2026-06-14T00:00:00",
+  "canvas_view": { "zoom": 1.0, "center_x": 400, "center_y": 200 },
+  "nodes": [
+    {
+      "id": "n001", "type": "ImageFileRead", "display_name": "读取图片",
+      "position": {"x": 50, "y": 100},
+      "params": {"file_path": "C:\\Users\\lenovo\\Desktop\\test_input.png"}
+    },
+    {
+      "id": "n002", "type": "ConvertToGray", "display_name": "转灰度",
+      "position": {"x": 300, "y": 100},
+      "params": {}
+    },
+    {
+      "id": "n003", "type": "CannyEdge", "display_name": "Canny边缘检测",
+      "position": {"x": 530, "y": 100},
+      "params": {
+        "threshold_low": 50.0,
+        "threshold_high": 150.0,
+        "aperture_size": "3"
+      }
+    },
+    {
+      "id": "n004", "type": "ImageFileWrite", "display_name": "导出结果",
+      "position": {"x": 780, "y": 100},
+      "params": {
+        "file_path": "C:\\Users\\lenovo\\Desktop\\test_06_output.png",
+        "format": "PNG",
+        "png_compression": 3,
+        "jpeg_quality": 95
+      }
+    }
+  ],
+  "connections": [
+    {"from_node":"n001","from_port":"output_image","to_node":"n002","to_port":"input_image"},
+    {"from_node":"n002","from_port":"output_image","to_node":"n003","to_port":"input_image"},
+    {"from_node":"n003","from_port":"output_image","to_node":"n004","to_port":"input_image"}
+  ],
+  "execution_order_hints": []
+}
